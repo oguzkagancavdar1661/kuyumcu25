@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ERZURUM KUYUMCUSU | Haute Joaillerie & Sarraf</title>
     
-    <meta name="description" content="Erzurum Kuyumcusu - Nesiller boyu güven, ömür boyu zarafet. Has altın, pırlanta ve özel tasarım sarraf ürünleri." />
+    <meta name="description" content="Erzurum Kuyumcusu - Nesiller boyu güven, ömür boyu zarafet. Has altın, pırlanta og özel tasarım sarraf ürünleri." />
     <meta property="og:title" content="ERZURUM KUYUMCUSU | Özel Dijital Sergi" />
     <meta property="og:description" content="En seçkin 22K and 14K altın koleksiyonlarimizi keşfedin." />
     <meta property="og:image" content="logo.jpg" />
@@ -59,6 +59,22 @@
             background: linear-gradient(135deg, #f3e1b9 0%, #c5a059 50%, #8c6d39 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* Fotoğraflara Lüks Altın Parıltısı Efekti */
+        .gold-halo-card .product-img-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; 
+            left: -150%; 
+            width: 50%; 
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(243, 225, 185, 0.25) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            transition: 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
+        }
+        .gold-halo-card:hover .product-img-wrapper::after {
+            left: 150%;
         }
 
         .gold-halo-card {
@@ -116,6 +132,16 @@
             animation: goldPulse 2s infinite;
         }
 
+        /* Piyasa Durumu Canlı Yanıp Sönme Rozeti */
+        @keyframes pulseGreen {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        .pulse-live-dot {
+            animation: pulseGreen 1.8s infinite ease-in-out;
+        }
+
         /* Kayan yazi animasyonu */
         @keyframes tickerMove {
             0% { transform: translate3d(0, 0, 0); }
@@ -153,8 +179,11 @@
 
     <div class="w-full bg-[#11131e] border-b border-[#c5a059]/20 py-2.5 text-[11px] font-sans-clean tracking-widest fixed top-0 z-50 text-slate-300 shadow-lg select-none">
         <div class="ticker-wrap flex items-center">
-            <div class="absolute left-0 bg-[#11131e] px-4 h-full flex items-center z-10 border-r border-[#c5a059]/10 text-[#c5a059] font-medium text-[10px]">
-                <i class="fa-solid fa-chart-line mr-2"></i> ERZURUM CANLI SARRAF BORSASI
+            <div class="absolute left-0 bg-[#11131e] px-4 h-full flex items-center z-10 border-r border-[#c5a059]/10 text-[#c5a059] font-medium text-[10px] gap-2">
+                <span class="text-emerald-400 font-bold pulse-live-dot">●</span> 
+                <span class="text-slate-400 font-normal">CANLI</span>
+                <span class="text-[#c5a059]/40 mx-0.5">|</span>
+                <i class="fa-solid fa-chart-line mr-0.5"></i> ERZURUM SARRAF BORSASI
             </div>
             <div class="ticker-content flex items-center gap-4" id="tickerContent">
             </div>
@@ -196,11 +225,11 @@
             </div>
             
             <h1 class="font-luxury text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide leading-[1.15] text-slate-100">
-                Usta Hands Sanatı,<br /><span class="gold-silk-text font-italic italic">Ömür Boyu İhtişam</span>
+                Usta Ellerin Sanatı,<br /><span class="gold-silk-text font-italic italic">Ömür Boyu İhtişam</span>
             </h1>
             
             <p class="font-luxury text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light italic">
-                Saray geleneğinden gelen eşsiz Erzurum burma bilezikleri, asil sarraf ziynetleri veruhunuza zarafet katacak elite koleksiyonlar.
+                Saray geleneğinden gelen eşsiz Erzurum burma bilezikleri, asil sarraf ziynetleri ve ruhunuza zarafet katacak seçkin koleksiyonlar.
             </p>
             
             <div class="pt-6">
@@ -299,7 +328,7 @@
 
                 <div class="faq-item bg-[#11131e] border border-slate-900 rounded-sm cursor-pointer" onclick="toggleFaq(this)">
                     <div class="p-6 flex justify-between items-center select-none">
-                        <h3 class="text-lg text-slate-200 tracking-wide">Eski altınlarımı takasta değerlendirebiliyor muyum?</h3>
+                        <h3 class="text-lg text-slate-200 tracking-wide">Eski altınlarımı takasta değerlendirebiliyor mumy?</h3>
                         <i class="fas fa-chevron-down faq-icon text-xs text-slate-500"></i>
                     </div>
                     <div class="faq-answer border-t border-slate-950/40">
@@ -434,7 +463,7 @@
             ceyrek: { isim: "ÇEYREK ALTIN", fiyat: 5180.00, tip: "has", yon: "stable" }
         };
 
-        // ÜRÜNLERİN GRAM AĞIRLIKLARI VE ATÖLYE İŞÇİLİK KATSAYILARI (Dinamik Hesaplama İçin)
+        // ÜRÜNLERİN GRAM AĞIRLIKLARI VE ATÖLYE İŞÇİLİK KATSAYILARI
         const urunler = {
             besiBirYerde: {
                 title: "Geleneksel Beşi Bir Yerde Ziynet",
@@ -651,17 +680,14 @@
         let secilenOlcu = "";
         let aktifUrunAnahtari = "";
 
-        // Para Formatlama Fonksiyonu
         function formatTRY(deger) {
             return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(deger);
         }
 
-        // Borsa Şeridini (Ticker) Güncelleyen Geliştirilmiş Fonksiyon
         function borsaSeridiniGuncelle() {
             const ticker = document.getElementById('tickerContent');
             let icerik = "";
             
-            // Sonsuz kayma döngüsünün kesilmemesi için kur listesini yan yana çoğaltıyoruz
             for(let i = 0; i < 3; i++) {
                 Object.keys(altinKurlari).forEach(key => {
                     const kur = altinKurlari[key];
@@ -671,7 +697,6 @@
                     if(kur.yon === "up") { ok = "▲"; renkSinifi = "price-up"; }
                     else if(kur.yon === "down") { ok = "▼"; renkSinifi = "price-down"; }
                     
-                    // Geliştirilmiş Premium Tasarım: Elmas ayracı, monospaced kur tasarımı ve geniş aralıklar
                     icerik += `<span class="inline-flex items-center gap-2 font-medium mx-6 select-none">
                         <span class="text-white tracking-widest uppercase text-[10px] font-sans-clean">${kur.isim}:</span> 
                         <span class="${renkSinifi} font-mono text-xs font-semibold">${formatTRY(kur.fiyat)} ${ok}</span>
@@ -682,13 +707,11 @@
             ticker.innerHTML = icerik;
         }
 
-        // Ürün Fiyatını Hesaplayan Fonksiyon
         function urunFiyatiHesapla(u) {
             const anaKur = altinKurlari[u.kurTipi].fiyat;
             return u.gramAginlik * anaKur * u.iscilikCarpani;
         }
 
-        // Vitrini ve Kartları Oluşturan/Güncelleyen Fonksiyon
         function vitrinOlustur() {
             const grid = document.getElementById('product-grid');
             
@@ -702,7 +725,7 @@
                     card.className = "gold-halo-card bg-[#11131e] border border-slate-900/60 rounded-sm overflow-hidden flex flex-col h-full";
                     card.id = `card-${key}`;
                     card.innerHTML = `
-                        <div onclick="openQuickView('${key}')" class="relative aspect-square bg-[#090a0f] overflow-hidden p-8 flex items-center justify-center cursor-pointer">
+                        <div onclick="openQuickView('${key}')" class="product-img-wrapper relative aspect-square bg-[#090a0f] overflow-hidden p-8 flex items-center justify-center cursor-pointer">
                             <img src="${u.img}" alt="${u.title}" class="w-full h-full object-contain transition-transform duration-[1.5s] ease-out hover:scale-105" />
                         </div>
                         <div class="p-8 flex flex-col flex-grow border-t border-slate-900/40 text-center">
@@ -738,7 +761,6 @@
             document.getElementById('whatsappFloatingBubble').href = `https://wa.me/${temizNumara}?text=${encodeURIComponent(genelMesaj)}`;
         }
 
-        // CANLI BORSA SİMÜLASYONU (4 Saniyede Bir Fiyatları Küçük Oranlarda Değiştirir)
         function canliBorsaSimulasyonu() {
             Object.keys(altinKurlari).forEach(key => {
                 const degisimOrani = (Math.random() * 0.4 - 0.2); 
@@ -813,6 +835,7 @@
             }
         }
 
+        // GELİŞTİRİLMİŞ PREMIUM/KURUMSAL WHATSAPP MESAJI
         function handleOrderSubmit() {
             if (secilenOlcu === "") {
                 document.getElementById('sizeWarning').classList.remove('hidden');
@@ -820,11 +843,11 @@
             }
 
             let temizNumara = KENDI_TELEFONUM.replace(/\D/g, '');
-            const siteUrl = window.location.origin;
-            const gorselLinki = siteUrl + "/" + encodeURIComponent(aktifUrun.img);
+            const siteUrl = window.location.origin + window.location.pathname;
+            const gorselLinki = window.location.origin + window.location.pathname + encodeURIComponent(aktifUrun.img);
             const siparisAnindakiFiyat = formatTRY(urunFiyatiHesapla(aktifUrun));
 
-            const mesaj = `Mücevher Danışmanı Yetkilisine,\n\nERZURUM KUYUMCUSU Dijital Vitrininizden şu model ürünü ekranda gördüğüm anlık borsa fiyatı ile sipariş etmek / rezerve etmek istiyorum:\n\nModel: ${aktifUrun.title}\nSeçilen Ölçü: ${secilenOlcu}\nSipariş Anındaki Canlı Fiyat: ${siparisAnindakiFiyat}\n\nÜrün Görseli: ${gorselLinki}`;
+            const mesaj = `Sayın Mücevher Danışmanı,\n\nERZURUM KUYUMCUSU Dijital Vitrin üzerinden incelediğim bir tasarım için sipariş talebi oluşturmak istiyorum. Detaylar aşağıda yer almaktadır:\n\n✨ Ürün Modeli: ${aktifUrun.title}\n📏 Talep Edilen Ölçü: ${secilenOlcu}\n💰 İşlem Anındaki Canlı Fiyat: ${siparisAnindakiFiyat}\n🔎 Ürün Detay Görseli: ${gorselLinki}\n\nTeslimat Seçeneği:\n[ ] Erzurum Merkez mağazanızdan elden teslim almak istiyorum.\n[ ] Adresime tam değerinde sigortalı kargo ile sevk edilmesini talep ediyorum.\n\nKonu hakkında müsaitliğinize göre geri dönüşünüzü rica eder, iyi çalışmalar dilerim.`;
             const whatsappUrl = `https://wa.me/${temizNumara}?text=${encodeURIComponent(mesaj)}`;
             window.open(whatsappUrl, '_blank');
         }
@@ -839,7 +862,6 @@
             }
         }
 
-        // İlk Yükleme Komutları
         window.onload = function() {
             borsaSeridiniGuncelle();
             vitrinOlustur();
